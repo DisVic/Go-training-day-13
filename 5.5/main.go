@@ -5,18 +5,32 @@ import (
 )
 
 func main() {
-	var n int
-	_, _ = fmt.Scan(&n)
-	numbers := make([]int, n)
-	counter := 1
-	for i := 0; i < n; i++ {
-		_, _ = fmt.Scan(&numbers[i])
+	var n, m int
+	_, _ = fmt.Scan(&n, &m)
+	numbers := make([][]string, n)
+	for i := 0; i < len(numbers); i++ {
+		numbers[i] = make([]string, m)
 	}
-
-	for j := 0; j < n-1; j++ {
-		if numbers[j] < numbers[j+1] {
-			counter++
+	for i := 0; i < n; i++ {
+		for j := 0; j < m; j++ {
+			_, _ = fmt.Scan(&numbers[i][j])
 		}
 	}
-	fmt.Println(counter)
+	isBnW := true
+outro:
+	for i := 0; i < n; i++ {
+		for j := 0; j < m; j++ {
+			if numbers[i][j] == "W" || numbers[i][j] == "B" || numbers[i][j] == "G" {
+				continue
+			} else {
+				isBnW = false
+				break outro
+			}
+		}
+	}
+	if isBnW == true {
+		fmt.Println("#Black&White")
+	} else {
+		fmt.Println("#Color")
+	}
 }
